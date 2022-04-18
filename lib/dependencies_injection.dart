@@ -10,7 +10,7 @@ import 'package:get_it/get_it.dart';
 GetIt getIt = GetIt.instance;
 
 Future<void> init() async {
-  getIt.registerFactory<PostRemoteDataSourceImpl>(
+  getIt.registerFactory<PostRepositoryDataSource>(
       () => PostRemoteDataSourceImpl());
   getIt.registerLazySingleton<PostRepository>(
       () => PostRepositoryImpl(remoteDataSource: getIt()));

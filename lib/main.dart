@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:crud_with_clean_architecture/features/Post/presentation/pages/get_post_screen.dart';
 import 'package:crud_with_clean_architecture/features/Post/presentation/provider/post_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,8 +31,10 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         home: Scaffold(
           body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text('welcome'),
+              GetPosts(),
             ],
           ),
         ),

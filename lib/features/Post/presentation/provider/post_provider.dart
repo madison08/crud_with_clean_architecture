@@ -36,6 +36,8 @@ class PostProvider extends ChangeNotifier {
       required this.deletePostUsecase});
 
   Future<void> fetchPosts() async {
+    print('EEEENTTTERRR');
+
     error = null;
 
     loadingState = PostLoadingState.fetchingAll;
@@ -44,6 +46,7 @@ class PostProvider extends ChangeNotifier {
     final response = await fetchPostsUsecase();
     response.fold((l) {
       loadingState = PostLoadingState.error;
+      print(l.message);
     }, (r) {
       loadingState = PostLoadingState.finished;
       // posts.add(r);

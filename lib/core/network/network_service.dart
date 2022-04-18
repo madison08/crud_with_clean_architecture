@@ -34,7 +34,8 @@ class NetworkService {
     return data;
   }
 
-  static Future<dynamic> put(String path, String id) async {
+  static Future<dynamic> put(
+      String path, String id, Map<String, dynamic> data) async {
     final uri = Uri.parse(path);
     var finalUri = uri.replace(queryParameters: {'id': id});
 

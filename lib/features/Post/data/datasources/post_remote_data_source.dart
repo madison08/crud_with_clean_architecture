@@ -1,6 +1,8 @@
 import '../../../../core/network/network_service.dart';
 import '../models/post.dart';
 
+const uri = 'https://x8ki-letl-twmt.n7.xano.io/api:aGRFFROk';
+
 abstract class PostRepositoryDataSource {
   Future<List<Post>> fetchAll();
   Future<Post> fetch(String id);
@@ -13,8 +15,8 @@ class PostRemoteDataSourceImpl extends PostRepositoryDataSource {
   @override
   Future<Post> add(Post params) async {
     var response = await (params.id != null
-        ? NetworkService.put('posts', params.id!, params.toJson())
-        : NetworkService.post('posts', params.toJson()));
+        ? NetworkService.put('$uri/posts', params.id!, params.toJson())
+        : NetworkService.post('$uri/posts', params.toJson()));
 
     if (response == null) return params;
     return Post.fromJson(response.data);
@@ -22,20 +24,20 @@ class PostRemoteDataSourceImpl extends PostRepositoryDataSource {
 
   @override
   Future<Post> delete(Post params) async {
-    await NetworkService.delete('posts', params.id ?? '');
+    await NetworkService.delete('$uri/posts', params.id ?? '');
     return params;
   }
 
   @override
   Future<Post> fetch(String id) async {
-    var response = await NetworkService.getById('posts', id);
+    var response = await NetworkService.getById('$uri/posts', id);
 
     return Post.fromJson(response.data);
   }
 
   @override
   Future<List<Post>> fetchAll() async {
-    var response = await NetworkService.get('posts');
+    var response = await NetworkService.get('$uri/posts');
 
     List<Post> datas = [];
 
@@ -48,7 +50,7 @@ class PostRemoteDataSourceImpl extends PostRepositoryDataSource {
 
   @override
   Future<Post> update(Post params) async {
-    await NetworkService.put('posts', params.id!, params.toJson());
+    await NetworkService.put('$uri/posts', params.id!, params.toJson());
 
     return params;
   }
