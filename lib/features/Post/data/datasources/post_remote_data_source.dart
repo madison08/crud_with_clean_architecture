@@ -15,7 +15,8 @@ class PostRemoteDataSourceImpl extends PostRepositoryDataSource {
   @override
   Future<Post> add(Post params) async {
     var response = await (params.id != null
-        ? NetworkService.put('$uri/posts', params.id!, params.toJson())
+        ? NetworkService.put(
+            '$uri/posts', params.id.toString(), params.toJson())
         : NetworkService.post('$uri/posts', params.toJson()));
 
     if (response == null) return params;
@@ -24,7 +25,7 @@ class PostRemoteDataSourceImpl extends PostRepositoryDataSource {
 
   @override
   Future<Post> delete(Post params) async {
-    await NetworkService.delete('$uri/posts', params.id ?? '');
+    await NetworkService.delete('$uri/posts', params.id.toString());
     return params;
   }
 
@@ -39,18 +40,26 @@ class PostRemoteDataSourceImpl extends PostRepositoryDataSource {
   Future<List<Post>> fetchAll() async {
     var response = await NetworkService.get('$uri/posts');
 
-    List<Post> datas = [];
+    return response.map((data) {
+      return Post.fromJson(data);
+    }).toList();
 
-    response.data.forEach((item) {
-      datas.add(Post.fromJson(item));
-    });
+    // List<Post> datas = [];
 
-    return datas;
+    print('pppppp');
+    print(response);
+
+    // response.data.forEach((item) {
+    //   datas.add(Post.fromJson(item));
+    // });
+
+    // return datas;
   }
 
   @override
   Future<Post> update(Post params) async {
-    await NetworkService.put('$uri/posts', params.id!, params.toJson());
+    await NetworkService.put(
+        '$uri/posts', params.id.toString(), params.toJson());
 
     return params;
   }

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 
 class NetworkService {
@@ -19,10 +21,36 @@ class NetworkService {
     return data;
   }
 
-  static Future<dynamic> get(String path) async {
+  static Future<List<dynamic>> get(String path) async {
     var data = await http.get(Uri.parse(path));
 
-    return data;
+    print('status code');
+    print(data.statusCode);
+
+    print('my data');
+    print(data.body);
+
+    // print("data decode");
+    // print(jsonDecode())
+
+    // data
+
+    switch (data.statusCode) {
+      case 200:
+        print(data.body.runtimeType);
+        var responsejson = jsonDecode(data.body);
+
+        return responsejson;
+      // break;
+      default:
+        throw UnimplementedError;
+    }
+
+    if (data.statusCode == 200) {
+      data = json.decode(data.body);
+    }
+
+    // return data;
   }
 
   static Future<dynamic> delete(String path, String id) async {
