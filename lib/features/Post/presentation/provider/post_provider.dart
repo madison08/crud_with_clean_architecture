@@ -50,6 +50,7 @@ class PostProvider extends ChangeNotifier {
     }, (r) {
       loadingState = PostLoadingState.finished;
       // posts.add(r);
+      posts = r;
       print(r);
     });
 

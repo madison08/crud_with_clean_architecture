@@ -24,12 +24,6 @@ class NetworkService {
   static Future<List<dynamic>> get(String path) async {
     var data = await http.get(Uri.parse(path));
 
-    print('status code');
-    print(data.statusCode);
-
-    print('my data');
-    print(data.body);
-
     // print("data decode");
     // print(jsonDecode())
 
@@ -37,7 +31,6 @@ class NetworkService {
 
     switch (data.statusCode) {
       case 200:
-        print(data.body.runtimeType);
         var responsejson = jsonDecode(data.body);
 
         return responsejson;

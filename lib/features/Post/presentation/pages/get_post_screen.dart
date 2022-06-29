@@ -1,3 +1,4 @@
+import 'package:crud_with_clean_architecture/features/Post/data/models/post.dart';
 import 'package:crud_with_clean_architecture/features/Post/presentation/provider/post_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -27,6 +28,28 @@ class _GetPostsState extends State<GetPosts> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Consumer<PostProvider>(builder: (ctx, postProvider, child) {
+      print(postProvider.posts.length);
+      if (postProvider.loadingState == PostLoadingState.fetchingAll) {
+        return Center(child: CircularProgressIndicator());
+      }
+      return Container(
+        // color: Colors.red,
+        height: 500.0,
+        child: ListView.builder(
+            // scrollDirection: Axis.vertical,
+            itemCount: postProvider.posts.length,
+            itemBuilder: (context, index) {
+              Post post = postProvider.posts[index];
+
+              return ListTile(
+                title: Text(
+                  post.title,
+                  style: TextStyle(color: Colors.black),
+                ),
+              );
+            }),
+      );
+    });
   }
 }

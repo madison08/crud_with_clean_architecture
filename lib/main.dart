@@ -31,10 +31,10 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         home: Scaffold(
           body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            // mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text('welcome'),
-              GetPosts(),
+              Expanded(child: GetPosts()),
             ],
           ),
         ),
